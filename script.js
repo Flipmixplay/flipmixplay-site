@@ -1,68 +1,42 @@
-//thx for code to safey(safey.neocities.org)
-function getYearsSince(dateString) {
-  const today = new Date();
-  const pastDate = new Date(dateString);
+// ============================================
+// ЗАГРУЗКА СТАТИСТИКИ DOTA 2
+// ============================================
 
-  let years = today.getFullYear() - pastDate.getFullYear();
+async function loadDotaStats() {
+    if (!SITE_CONFIG.dota.enabled) return;
 
-  const monthDiff = today.getMonth() - pastDate.getMonth();
-  const dayDiff = today.getDate() - pastDate.getDate();
-
-  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    years--;
-    }
-      return years;
-    }
-    // not my real birthday
-    document.getElementById('age').textContent = getYearsSince("2006-10-01");
-    document.getElementById('guitar-year').textContent = getYearsSince("2021-09-09");
-
-
-    async function loadDotaStats() {
-        try {
-            const response = await fetch('stats.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-
-            // Получаем текущий язык
-            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-            const loadingText = translations[currentLang]?.loading || 'Loading...';
-            const unrankedText = translations[currentLang]?.unranked || 'Unranked';
-
-            // 1. Обработка Ранга
-            const originalRank = data.rank || unrankedText;
-            const translatedRank = getTranslatedRank(originalRank); // Используем функцию из i18n.js
-
-            const rankEl = document.getElementById('dota-rank');
-            if (rankEl) {
-                rankEl.textContent = translatedRank;
-                rankEl.dataset.originalRank = originalRank; // Сохраняем оригинал для переключения языка
-            }
-
-            // 2. Обработка Винрейта и Героя
-            const winrateEl = document.getElementById('dota-winrate');
-            if (winrateEl) winrateEl.textContent = data.winrate || '0%';
-
-            const heroEl = document.getElementById('dota-hero');
-            if (heroEl) heroEl.textContent = data.top_hero || 'Unknown';
-
-            // Убираем анимацию загрузки
-            document.getElementById('dota-section').classList.remove('loading');
-
-        } catch (error) {
-            console.error("Ошибка при загрузке статистики:", error);
-            const rankEl = document.getElementById('dota-rank');
-            const winrateEl = document.getElementById('dota-winrate');
-            const heroEl = document.getElementById('dota-hero');
-            const sectionEl = document.getElementById('dota-section');
-
-            if(rankEl) rankEl.textContent = "N/A";
-            if(winrateEl) winrateEl.textContent = "N/A";
-            if(heroEl) heroEl.textContent = "N/A";
-            if(sectionEl) sectionEl.classList.remove('loading');
+    try {
+        const response = await fetch('stats.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    }
+        const data = await response.json();
 
-    document.addEventListener('DOMContentLoaded', loadDotaStats);
+        const currentLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default;
+        const unrankedText = TRANSLATIONS[currentLang].unranked;
+
+        // Обработка ранга
+        const originalRank = data.rank || unrankedText;
+        const translatedRank = getTranslatedRank(originalRank);
+
+        const rankEl = document.getElementById('dota-rank');
+        if (rankEl) {
+            rankEl.textContent = translatedRank;
+            rankEl.dataset.originalRank = originalRank;
+        }
+
+        // Винрейт и герой
+        const winrateEl = document.getElementById('dota-winrate');
+        if (winrateEl) winrateEl.textContent = data.winrate || '0%';
+
+        const heroEl = document.getElementById('dota-hero');
+        if (heroEl) heroEl.textContent = data.top_hero || TRANSLATIONS[currentLang].unknown;
+
+        document.getElementById('dota-section').classList.remove('loading');
+
+    } catch (error) {
+        console.error("Ошибка при загрузке статистики:", error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadDotaStats);
