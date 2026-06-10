@@ -21,9 +21,15 @@ def get_dota_stats():
             if 1 <= tier <= 8:
                 rank_text = f"{medals[tier - 1]} {stars}"
 
-        # Обработка винрейта
-        total_games = wl.get('win', 0) + wl.get('loss', 0)
-        winrate = f"{(wl.get('win', 0) / total_games * 100):.1f}%" if total_games > 0 else "0%"
+        # 2. Обработка винрейта
+        if isinstance(wl, dict):
+            wins = wl.get('win', 0)
+            losses = wl.get('lose', 0)
+            total_games = wins + losses
+            winrate = f"{(wins / total_games * 100):.1f}%" if total_games > 0 else "0%"
+        else:
+            print(f"⚠️ Не удалось получить WL. Ответ: {wl}")
+            winrate = "N/A"
 
         # Обработка любимого героя
         if heroes:
