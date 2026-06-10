@@ -4,49 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flipmixplay's Website</title>
+
+    <!-- Подключаем современные шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Подключаем иконки Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- ПОДКЛЮЧАЕМ НАШ ФАЙЛ СО СТИЛЯМИ -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
+        <!-- ШАПКА ПРОФИЛЯ -->
         <header>
-            <img src="/neocities.png" alt="Avatar" class="avatar">
+            <!-- Замени neocities.png на свою аватарку, если нужно -->
+            <img src="./avatar.jpg" alt="Avatar" class="avatar">
             <h1>Flipmixplay</h1>
             <p class="subtitle">Welcome to my personal corner of the web!</p>
         </header>
 
+        <!-- РАЗДЕЛ "ОБО МНЕ" -->
         <section class="about section">
             <h2><i class="fas fa-user"></i> About Me</h2>
             <p>
-                Hello User! This is my static website hosted on Neocities.
-                Here you can find links to my social media, check out my projects,
-                or just learn a bit more about me. Feel free to connect!
+                Hello my name is flipmixplay<br>
+                I am <span id="age"></span> years old!<br>
+                I love games like Dota, Terraria, Risk of Rain 2 and all sorts of indie projects.<br>
+                I also like programming in Python and C#.<br>
             </p>
         </section>
 
+        <!-- РАЗДЕЛ "ССЫЛКИ" -->
         <section class="socials section">
             <h2><i class="fas fa-link"></i> Connect With Me</h2>
             <div class="links-container">
+
                 <a href="https://github.com/Flipmixplay" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-github icon github"></i>
                     <span class="text">My GitHub</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
+
                 <a href="https://steamcommunity.com/id/flipmixplay/" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-steam icon steam"></i>
                     <span class="text">My Steam</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
+
                 <a href="https://discord.com/users/581012692744011776" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-discord icon discord"></i>
                     <span class="text">My Discord</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
+
+                <a href="https://www.youtube.com/@flipmixplay" target="_blank" rel="noopener noreferrer" class="link-card">
+                    <i class="fab fa-youtube icon youtube"></i>
+                    <span class="text">My Youtube</span>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </a>
+
             </div>
         </section>
 
-        <!-- DOTA 2 STATISTICS -->
+         <!-- DOTA 2 STATISTICS -->
         <section class="dota-stats section">
             <h2><i class="fas fa-gamepad"></i> Dota 2 Statistics</h2>
             <div class="stats-grid">
@@ -70,12 +92,11 @@
                 <i class="fas fa-external-link-alt"></i> View Full Profile on Dotabuff
             </a>
         </section>
-
+        <!-- ПОДВАЛ -->
         <footer>
             <p>Hosted on <a href="http://neocities.org" target="_blank">Neocities</a></p>
         </footer>
     </div>
-
-    <script src="script.js"></script>
+     <script src="script.js"></script>
 </body>
 </html>

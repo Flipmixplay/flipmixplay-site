@@ -1,3 +1,163 @@
+/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
+   HTML content. To learn how to do something, just try searching Google for questions like
+   "how to change link color." */
+
+/* --- БАЗОВЫЕ НАСТРОЙКИ И СБРОС СТИЛЕЙ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
+.container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* --- ШАПКА И АВАТАР --- */
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: #a0a0a0;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* --- РАЗДЕЛ "ОБО МНЕ" --- */
+.section {
+    margin-bottom: 30px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #00d2ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section p {
+    color: #d0d0d0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* --- КАРТОЧКИ С ССЫЛКАМИ --- */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.link-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.link-card .icon {
+    font-size: 24px;
+    width: 35px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+/* Индивидуальные цвета для иконок */
+.icon.github { color: #ffffff; }
+.icon.steam { color: #152e5b; }
+.icon.discord { color: #5865F2; }
+.icon.youtube { color: #ff0033; }
+
+.link-card .text {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.link-card .arrow {
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.link-card:hover .arrow {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* --- ПОДВАЛ (FOOTER) --- */
+footer {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #707070;
+}
+
+footer a {
+    color: #00d2ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
 /* =========================================
    ПОЛНЫЕ СТИЛИ ДЛЯ РАЗДЕЛА DOTA 2 (API)
    ========================================= */
