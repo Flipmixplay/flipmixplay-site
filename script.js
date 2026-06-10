@@ -31,10 +31,22 @@ function getYearsSince(dateString) {
             const loadingText = translations[currentLang]?.loading || 'Loading...';
             const unrankedText = translations[currentLang]?.unranked || 'Unranked';
 
-            // Вставляем данные в HTML
-            document.getElementById('dota-rank').textContent = data.rank || unrankedText;
-            document.getElementById('dota-winrate').textContent = data.winrate || '0%';
-            document.getElementById('dota-hero').textContent = data.top_hero || 'Unknown';
+            // 1. Обработка Ранга
+            const originalRank = data.rank || unrankedText;
+            const translatedRank = getTranslatedRank(originalRank); // Используем функцию из i18n.js
+
+            const rankEl = document.getElementById('dota-rank');
+            if (rankEl) {
+                rankEl.textContent = translatedRank;
+                rankEl.dataset.originalRank = originalRank; // Сохраняем оригинал для переключения языка
+            }
+
+            // 2. Обработка Винрейта и Героя
+            const winrateEl = document.getElementById('dota-winrate');
+            if (winrateEl) winrateEl.textContent = data.winrate || '0%';
+
+            const heroEl = document.getElementById('dota-hero');
+            if (heroEl) heroEl.textContent = data.top_hero || 'Unknown';
 
             // Убираем анимацию загрузки
             document.getElementById('dota-section').classList.remove('loading');

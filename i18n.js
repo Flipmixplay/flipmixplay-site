@@ -1,9 +1,10 @@
 // Словарь переводов
 const translations = {
+
     en: {
         subtitle: "Welcome to my personal corner of the web!",
         about_title: "About Me",
-        about_text_1: "Hello my name is flipmixplay",
+        about_text_1: "Hello my name is Miron",
         about_text_2: "I am",
         about_text_3: "years old!",
         about_text_4: "I love games like Dota, Terraria, Risk of Rain 2 and all sorts of indie projects.",
@@ -28,7 +29,7 @@ const translations = {
     ru: {
         subtitle: "Добро пожаловать в мой личный уголок интернета!",
         about_title: "Обо мне",
-        about_text_1: "Привет, меня зовут flipmixplay",
+        about_text_1: "Привет, меня зовут Мирон",
         about_text_2: "Мне",
         about_text_3: "лет!",
         about_text_4: "Я люблю такие игры как Dota, Terraria, Risk of Rain 2 и всякие инди-проекты.",
@@ -51,6 +52,34 @@ const translations = {
         unranked: "Без ранга"
     }
 };
+
+// Словарь переводов рангов Dota 2
+const rankTranslations = {
+    en: {
+        "Herald": "Herald", "Guardian": "Guardian", "Crusader": "Crusader",
+        "Archon": "Archon", "Legend": "Legend", "Ancient": "Ancient",
+        "Divine": "Divine", "Immortal": "Immortal", "Unranked": "Unranked"
+    },
+    ru: {
+        "Herald": "Герольд", "Guardian": "Страж", "Crusader": "Рыцарь",
+        "Archon": "Архонт", "Legend": "Легенда", "Ancient": "Древний",
+        "Divine": "Божественный", "Immortal": "Бессмертный", "Unranked": "Без ранга"
+    }
+};
+
+// Функция перевода ранга
+function getTranslatedRank(rankText) {
+    if (!rankText || rankText === 'N/A') return rankText;
+    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+
+    // Разделяем "Crusader" и "3"
+    const parts = rankText.split(' ');
+    const medal = parts[0];
+    const stars = parts[1] || '';
+
+    const translatedMedal = rankTranslations[currentLang][medal] || medal;
+    return stars ? `${translatedMedal} ${stars}` : translatedMedal;
+}
 
 // Функция переключения языка
 function setLanguage(lang) {
@@ -81,24 +110,10 @@ function setLanguage(lang) {
     // Сохраняем выбор в localStorage
     localStorage.setItem('preferredLanguage', lang);
 
-    // Обновляем язык Giscus (перезагружаем виджет)
-    updateGiscusLanguage(lang);
-}
-
-// Функция для обновления языка Giscus
-function updateGiscusLanguage(lang) {
-    const giscusScript = document.querySelector('script[src*="giscus.app/client.js"]');
-    if (giscusScript) {
-        giscusScript.setAttribute('data-lang', lang);
-
-        // Перезагружаем Giscus
-        const iframe = document.querySelector('.giscus-frame');
-        if (iframe) {
-            iframe.remove();
-            // Перезагружаем скрипт
-            const newScript = giscusScript.cloneNode(true);
-            giscusScript.parentNode.replaceChild(newScript, giscusScript);
-        }
+    // Переводим ранг, если он уже загружен
+    const rankEl = document.getElementById('dota-rank');
+    if (rankEl && rankEl.dataset.originalRank) {
+        rankEl.textContent = getTranslatedRank(rankEl.dataset.originalRank);
     }
 }
 
