@@ -268,53 +268,120 @@ footer a:hover {
     }
 }
 /* =========================================
-   СТИЛИ ДЛЯ СЕКЦИИ КОММЕНТАРИЕВ (Giscus)
+   СТИЛИ ДЛЯ КОММЕНТАРИЕВ (Steam Style)
    ========================================= */
 
 .comments-section {
-    /* Делаем фон чуть темнее, чтобы текст Giscus читался лучше на прозрачном фоне */
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(0, 210, 255, 0.15); /* Тонкая голубая рамка */
+    background: linear-gradient(135deg, rgba(15, 32, 39, 0.95), rgba(44, 83, 100, 0.9));
+    border: 2px solid rgba(0, 210, 255, 0.3);
     border-radius: 16px;
-    padding: 25px;
+    padding: 30px;
     margin-top: 40px;
-    transition: border-color 0.3s ease;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 210, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
 }
 
-.comments-section:hover {
-    border-color: rgba(0, 210, 255, 0.3); /* Легкое свечение при наведении на весь блок */
+/* Декоративная линия сверху */
+.comments-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00d2ff, transparent);
+    box-shadow: 0 0 10px #00d2ff;
 }
 
-.comments-section h2 {
-    color: #00d2ff;
-    font-size: 1.3rem;
-    margin-bottom: 20px;
+.comments-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 12px;
+    margin-bottom: 25px;
     padding-bottom: 15px;
+    border-bottom: 2px solid rgba(0, 210, 255, 0.2);
 }
 
-/* Принудительно растягиваем iframe Giscus на всю ширину и скругляем его края */
+.comments-header i {
+    font-size: 1.8rem;
+    color: #00d2ff;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+.comments-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #00d2ff, #0078ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.comments-badge {
+    margin-left: auto;
+    background: rgba(0, 210, 255, 0.15);
+    color: #00d2ff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+}
+
+/* Стили для iframe Giscus */
 .comments-section iframe {
     width: 100% !important;
     border-radius: 8px;
-    margin-top: 10px;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Убираем стандартный скроллбар Giscus, если он есть, и делаем его красивым (для Webkit браузеров) */
-.comments-section iframe::-webkit-scrollbar {
-    width: 8px;
+/* Анимация появления */
+.comments-section {
+    animation: slideUp 0.5s ease-out;
 }
-.comments-section iframe::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-.comments-section iframe::-webkit-scrollbar-thumb {
-    background: rgba(0, 210, 255, 0.3);
-    border-radius: 4px;
+
+/* Эффект свечения при наведении */
+.comments-section:hover {
+    border-color: rgba(0, 210, 255, 0.5);
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 210, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
-.comments-section iframe::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 210, 255, 0.5);
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .comments-section {
+        padding: 20px;
+    }
+
+    .comments-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .comments-badge {
+        margin-left: 0;
+    }
 }
