@@ -61,9 +61,9 @@ const rankTranslations = {
         "Divine": "Divine", "Immortal": "Immortal", "Unranked": "Unranked"
     },
     ru: {
-        "Herald": "Герольд", "Guardian": "Страж", "Crusader": "Рыцарь",
-        "Archon": "Архонт", "Legend": "Легенда", "Ancient": "Древний",
-        "Divine": "Божественный", "Immortal": "Бессмертный", "Unranked": "Без ранга"
+        "Herald": "Рекрут", "Guardian": "Страж", "Crusader": "Рыцарь",
+        "Archon": "Герой", "Legend": "Легенда", "Ancient": "Властелин",
+        "Divine": "Божество", "Immortal": "Титан", "Unranked": "Без ранга"
     }
 };
 
