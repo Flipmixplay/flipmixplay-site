@@ -15,6 +15,8 @@ function getYearsSince(dateString) {
     }
     // not my real birthday
     document.getElementById('age').textContent = getYearsSince("2006-10-01");
+    document.getElementById('guitar-year').textContent = getYearsSince("2021-09-09");
+
 
     async function loadDotaStats() {
         try {
