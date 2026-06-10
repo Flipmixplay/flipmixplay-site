@@ -267,3 +267,54 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 }
+/* =========================================
+   СТИЛИ ДЛЯ СЕКЦИИ КОММЕНТАРИЕВ (Giscus)
+   ========================================= */
+
+.comments-section {
+    /* Делаем фон чуть темнее, чтобы текст Giscus читался лучше на прозрачном фоне */
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 210, 255, 0.15); /* Тонкая голубая рамка */
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 40px;
+    transition: border-color 0.3s ease;
+}
+
+.comments-section:hover {
+    border-color: rgba(0, 210, 255, 0.3); /* Легкое свечение при наведении на весь блок */
+}
+
+.comments-section h2 {
+    color: #00d2ff;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+}
+
+/* Принудительно растягиваем iframe Giscus на всю ширину и скругляем его края */
+.comments-section iframe {
+    width: 100% !important;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Убираем стандартный скроллбар Giscus, если он есть, и делаем его красивым (для Webkit браузеров) */
+.comments-section iframe::-webkit-scrollbar {
+    width: 8px;
+}
+.comments-section iframe::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+.comments-section iframe::-webkit-scrollbar-thumb {
+    background: rgba(0, 210, 255, 0.3);
+    border-radius: 4px;
+}
+.comments-section iframe::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 210, 255, 0.5);
+}
