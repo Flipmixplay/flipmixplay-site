@@ -1,7 +1,7 @@
 import requests
 import json
 
-STEAM_ID = 'flipmixplay'
+STEAM_ID = '840785563'
 API_URL = 'https://api.opendota.com/api/players'
 
 def get_dota_stats():
