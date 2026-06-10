@@ -19,49 +19,54 @@
     <div class="container">
         <!-- ШАПКА ПРОФИЛЯ -->
         <header>
-            <!-- Замени neocities.png на свою аватарку, если нужно -->
+            <!-- Переключатель языков -->
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ru">RU</button>
+            </div>
+
             <img src="./avatar.jpg" alt="Avatar" class="avatar">
             <h1>Flipmixplay</h1>
-            <p class="subtitle">Welcome to my personal corner of the web!</p>
+            <p class="subtitle" data-i18n="subtitle">Welcome to my personal corner of the web!</p>
         </header>
 
         <!-- РАЗДЕЛ "ОБО МНЕ" -->
         <section class="about section">
-            <h2><i class="fas fa-user"></i> About Me</h2>
+            <h2><i class="fas fa-user"></i> <span data-i18n="about_title">About Me</span></h2>
             <p>
-                Hello my name is flipmixplay<br>
-                I am <span id="age"></span> years old!<br>
-                I love games like Dota, Terraria, Risk of Rain 2 and all sorts of indie projects.<br>
-                I also like programming in Python and C#.<br>
+                <span data-i18n="about_text_1">Hello my name is flipmixplay</span><br>
+                <span data-i18n="about_text_2">I am</span> <span id="age"></span> <span data-i18n="about_text_3">years old!</span><br>
+                <span data-i18n="about_text_4">I love games like Dota, Terraria, Risk of Rain 2 and all sorts of indie projects.</span><br>
+                <span data-i18n="about_text_5">I also like programming in Python and C#.</span>
             </p>
         </section>
 
         <!-- РАЗДЕЛ "ССЫЛКИ" -->
         <section class="socials section">
-            <h2><i class="fas fa-link"></i> Connect With Me</h2>
+            <h2><i class="fas fa-link"></i> <span data-i18n="connect_title">Connect With Me</span></h2>
             <div class="links-container">
 
                 <a href="https://github.com/Flipmixplay" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-github icon github"></i>
-                    <span class="text">My GitHub</span>
+                    <span class="text" data-i18n="github">My GitHub</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
 
                 <a href="https://steamcommunity.com/id/flipmixplay/" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-steam icon steam"></i>
-                    <span class="text">My Steam</span>
+                    <span class="text" data-i18n="steam">My Steam</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
 
                 <a href="https://discord.com/users/581012692744011776" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-discord icon discord"></i>
-                    <span class="text">My Discord</span>
+                    <span class="text" data-i18n="discord">My Discord</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
 
                 <a href="https://www.youtube.com/@flipmixplay" target="_blank" rel="noopener noreferrer" class="link-card">
                     <i class="fab fa-youtube icon youtube"></i>
-                    <span class="text">My Youtube</span>
+                    <span class="text" data-i18n="youtube">My Youtube</span>
                     <i class="fas fa-arrow-right arrow"></i>
                 </a>
 
@@ -70,34 +75,30 @@
 
         <!-- РАЗДЕЛ "DOTA 2 STATISTICS" (OpenDota Style) -->
         <section class="dota-stats section" id="dota-section">
-            <h2><i class="fas fa-gamepad"></i> Dota 2 Statistics</h2>
+            <h2><i class="fas fa-gamepad"></i> <span data-i18n="dota_title">Dota 2 Statistics</span></h2>
 
             <div class="stats-grid">
-                <!-- Статистика 1: Ранг -->
                 <div class="stat-item">
                     <i class="fas fa-trophy stat-icon"></i>
                     <span class="stat-value" id="dota-rank">Loading...</span>
-                    <span class="stat-label">Rank Tier</span>
+                    <span class="stat-label" data-i18n="rank_tier">Rank Tier</span>
                 </div>
 
-                <!-- Статистика 2: Винрейт -->
                 <div class="stat-item">
                     <i class="fas fa-chart-line stat-icon"></i>
                     <span class="stat-value" id="dota-winrate">Loading...</span>
-                    <span class="stat-label">Winrate</span>
+                    <span class="stat-label" data-i18n="winrate">Winrate</span>
                 </div>
 
-                <!-- Статистика 3: Любимый герой -->
                 <div class="stat-item">
                     <i class="fas fa-dragon stat-icon"></i>
                     <span class="stat-value" id="dota-hero">Loading...</span>
-                    <span class="stat-label">Most Played</span>
+                    <span class="stat-label" data-i18n="most_played">Most Played</span>
                 </div>
             </div>
 
-            <!-- Кнопка-ссылка на OpenDota -->
             <a href="https://www.opendota.com/players/840785563" target="_blank" rel="noopener noreferrer" class="dota-btn opendota-btn">
-                <i class="fas fa-chart-bar"></i> View Full Profile on OpenDota
+                <i class="fas fa-chart-bar"></i> <span data-i18n="view_opendota">View Full Profile on OpenDota</span>
             </a>
         </section>
 
@@ -105,7 +106,7 @@
         <section class="comments-section section">
             <div class="comments-header">
                 <i class="fas fa-comments"></i>
-                <h2>Обсуждение</h2>
+                <h2 data-i18n="comments_title">Обсуждение</h2>
                 <span class="comments-badge">Powered by Giscus</span>
             </div>
 
@@ -128,9 +129,11 @@
         </section>
 
         <footer>
-            <p>Hosted with ❤️ on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+            <p><span data-i18n="hosted">Hosted with ❤️ on</span> <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
         </footer>
-    </div> <!-- Конец container -->
+    </div>
+
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
-  </body>
-  </html>
+</body>
+</html>
