@@ -17,17 +17,35 @@ function getYearsSince(dateString) {
     document.getElementById('age').textContent = getYearsSince("2006-10-01");
 
     async function loadDotaStats() {
-        try {
-            const response = await fetch('stats.json');
-            const data = await response.json();
-            document.getElementById('dota-rank').textContent = data.rank || 'Unranked';
-            document.getElementById('dota-winrate').textContent = data.winrate || '0%';
-            document.getElementById('dota-hero').textContent = data.top_hero || 'Unknown';
-        } catch (error) {
-            console.error("Ошибка загрузки stats.json:", error);
-            // Если файла нет, покажем заглушку, но без ошибок null
-            const rankEl = document.getElementById('dota-rank');
-            if(rankEl) rankEl.textContent = "N/A";
+    try {
+        // Читаем локальный файл, который обновляет GitHub Actions
+        const response = await fetch('stats.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        const data = await response.json();
+
+        // Вставляем данные в HTML
+        document.getElementById('dota-rank').textContent = data.rank || 'Unranked';
+        document.getElementById('dota-winrate').textContent = data.winrate || '0%';
+        document.getElementById('dota-hero').textContent = data.top_hero || 'Unknown';
+
+        // Убираем анимацию загрузки
+        document.getElementById('dota-section').classList.remove('loading');
+
+    } catch (error) {
+        console.error("Ошибка при загрузке статистики:", error);
+        // Безопасная обработка, если элемента нет или файл не найден
+        const rankEl = document.getElementById('dota-rank');
+        const winrateEl = document.getElementById('dota-winrate');
+        const heroEl = document.getElementById('dota-hero');
+        const sectionEl = document.getElementById('dota-section');
+
+        if(rankEl) rankEl.textContent = "N/A";
+        if(winrateEl) winrateEl.textContent = "N/A";
+        if(heroEl) heroEl.textContent = "N/A";
+        if(sectionEl) sectionEl.classList.remove('loading');
     }
-    document.addEventListener('DOMContentLoaded', loadDotaStats);
+}
+
+document.addEventListener('DOMContentLoaded', loadDotaStats);

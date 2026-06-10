@@ -68,55 +68,59 @@
             </div>
         </section>
 
-         <!-- DOTA 2 STATISTICS -->
-         <section class="dota-stats section" id="dota-section">
-             <h2><i class="fas fa-gamepad"></i> Dota 2 Statistics</h2>
-             <div class="stats-grid">
-                 <div class="stat-item">
-                     <i class="fas fa-trophy stat-icon"></i>
-                     <span class="stat-value" id="dota-rank">Loading...</span>
-                     <span class="stat-label">Rank Tier</span>
-                 </div>
-                 <div class="stat-item">
-                     <i class="fas fa-chart-line stat-icon"></i>
-                     <span class="stat-value" id="dota-winrate">Loading...</span>
-                     <span class="stat-label">Winrate</span>
-                 </div>
-                 <div class="stat-item">
-                     <i class="fas fa-dragon stat-icon"></i>
-                     <span class="stat-value" id="dota-hero">Loading...</span>
-                     <span class="stat-label">Most Played</span>
-                 </div>
-             </div>
-             <a href="https://www.dotabuff.com/players/flipmixplay" target="_blank" rel="noopener noreferrer" class="dota-btn">
-                 <i class="fas fa-external-link-alt"></i> View Full Profile on Dotabuff
-             </a>
-         </section>
-        <footer>
-            <p>Hosted on <a href="http://neocities.org" target="_blank">Github Pages</a></p>
-          </footer>
+        <!-- РАЗДЕЛ "DOTA 2 STATISTICS" (OpenDota Style) -->
+        <section class="dota-stats section" id="dota-section">
+            <h2><i class="fas fa-gamepad"></i> Dota 2 Statistics</h2>
 
-          <!-- Секция комментариев Giscus -->
-          <section class="section" style="margin-top: 30px;">
-              <h2><i class="fas fa-comments"></i> Comments</h2>
-              <script src="https://giscus.app/client.js"
-                      data-repo="Flipmixplay/flipmixplay-site"
-                      data-repo-id="R_kgDOS2yXuQ"
-                      data-category="Announcements"
-                      data-category-id="DIC_kwDOS2yXuc4C-6Kk"
-                      data-mapping="pathname"
-                      data-strict="0"
-                      data-reactions-enabled="1"
-                      data-emit-metadata="0"
-                      data-input-position="bottom"
-                      data-theme="preferred_color_scheme"
-                      data-lang="ru"
-                      crossorigin="anonymous"
-                      async>
-              </script>
-          </section>
+            <div class="stats-grid">
+                <!-- Статистика 1: Ранг -->
+                <div class="stat-item">
+                    <i class="fas fa-trophy stat-icon"></i>
+                    <span class="stat-value" id="dota-rank">Loading...</span>
+                    <span class="stat-label">Rank Tier</span>
+                </div>
 
-      </div> <!-- Конец container -->
-      <script src="script.js"></script>
+                <!-- Статистика 2: Винрейт -->
+                <div class="stat-item">
+                    <i class="fas fa-chart-line stat-icon"></i>
+                    <span class="stat-value" id="dota-winrate">Loading...</span>
+                    <span class="stat-label">Winrate</span>
+                </div>
+
+                <!-- Статистика 3: Любимый герой -->
+                <div class="stat-item">
+                    <i class="fas fa-dragon stat-icon"></i>
+                    <span class="stat-value" id="dota-hero">Loading...</span>
+                    <span class="stat-label">Most Played</span>
+                </div>
+            </div>
+
+            <!-- Кнопка-ссылка на OpenDota -->
+            <a href="https://www.opendota.com/players/840785563" target="_blank" rel="noopener noreferrer" class="dota-btn opendota-btn">
+                <i class="fas fa-chart-bar"></i> View Full Profile on OpenDota
+            </a>
+        </section>
+
+        <!-- Секция комментариев Giscus -->
+        <section class="section" style="margin-top: 30px;">
+            <h2><i class="fas fa-comments"></i> Comments</h2>
+            <script src="https://giscus.app/client.js"
+                    data-repo="Flipmixplay/flipmixplay-site"
+                    data-repo-id="R_kgDOS2yXuQ"
+                    data-category="Announcements"
+                    data-category-id="DIC_kwDOS2yXuc4C-6Kk"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="ru"
+                    crossorigin="anonymous"
+                    async>
+          </script>
+      </section>
+    </div> <!-- Конец container -->
+    <script src="script.js"></script>
   </body>
   </html>
