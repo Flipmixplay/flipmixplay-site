@@ -21,40 +21,47 @@ function t(key) {
     return TRANSLATIONS[lang][key] || TRANSLATIONS.en[key] || key;
 }
 
-// Функция переключения языка
+
 function setLanguage(lang) {
-    if (!TRANSLATIONS[lang]) {
-        lang = SITE_CONFIG.language.default;
+  // Проверяем, существует ли язык
+  if (!translations[lang]) {
+    lang = 'en'; // По умолчанию английский
+  }
+
+  // 1. Обновляем все стандартные элементы с data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      element.textContent = translations[lang][key];
     }
+  });
 
-    // Обновляем все элементы с data-i18n
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        element.textContent = t(key);
-    });
+  // 2. ✅ ИСПРАВЛЕНИЕ: Обновляем динамический текст "Обо мне"
+  const aboutTextEl = document.getElementById('about-text');
+  if (aboutTextEl) {
+    // Функция renderAboutText доступна глобально из renderer.js
+    aboutTextEl.innerHTML = renderAboutText(lang); 
+  }
 
-    // Обновляем атрибут lang в HTML
-    document.documentElement.lang = lang;
+  // 3. Обновляем атрибут lang в HTML
+  document.documentElement.lang = lang;
 
-    // Обновляем активную кнопку
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-lang') === lang) {
-            btn.classList.add('active');
-        }
-    });
-
-    // Сохраняем выбор
-    localStorage.setItem('preferredLanguage', lang);
-
-    // Переводим ранг
-    const rankEl = document.getElementById('dota-rank');
-    if (rankEl && rankEl.dataset.originalRank) {
-        rankEl.textContent = getTranslatedRank(rankEl.dataset.originalRank);
+  // 4. Обновляем активную кнопку
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-lang') === lang) {
+      btn.classList.add('active');
     }
+  });
 
-    // Обновляем заголовок страницы
-    document.title = `${SITE_CONFIG.profile.name}'s Website`;
+  // 5. Сохраняем выбор в localStorage
+  localStorage.setItem('preferredLanguage', lang);
+
+  // 6. Переводим ранг Dota 2, если он уже загружен
+  const rankEl = document.getElementById('dota-rank');
+  if (rankEl && rankEl.dataset.originalRank) {
+    rankEl.textContent = getTranslatedRank(rankEl.dataset.originalRank);
+  }
 }
 
 // Автоматическое определение языка
