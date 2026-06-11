@@ -49,10 +49,10 @@ function renderSite() {
      // Определяем начальный язык корректно
      const initialLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default || 'en';
      html += `
-         <section id="about">
-             <h2 data-i18n="about_title">About Me</h2>
-             <p id="about-text">${renderAboutText(initialLang)}</p>
-         </section>
+     <section id="about">
+     <h2 data-i18n="about_title">About Me</h2>
+     <p id="about-text">${renderAboutText(initialLang)}</p>
+     </section>
      `;
 
     // ССЫЛКИ
