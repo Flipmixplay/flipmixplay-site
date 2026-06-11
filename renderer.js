@@ -118,19 +118,6 @@ function renderSite() {
     // КОММЕНТАРИИ
     if (config.comments.enabled) {
         const commentsConfig = config.comments[config.comments.platform];
-        let commentsScript = '';
-
-        if (config.comments.platform === 'utterances') {
-            commentsScript = `
-                <script src="https://utteranc.es/client.js"
-                    repo="${commentsConfig.repo}"
-                    issue-term="${commentsConfig.issueTerm}"
-                    theme="${commentsConfig.theme}"
-                    crossorigin="anonymous"
-                    async>
-                <\/script>
-            `;
-        }
 
         html += `
             <section class="comments-section section">
@@ -139,7 +126,7 @@ function renderSite() {
                     <h2 data-i18n="comments_title">Discussion</h2>
                     <span class="comments-badge">Powered by ${config.comments.platform}</span>
                 </div>
-                ${commentsScript}
+                <div id="utterances-container"></div>
             </section>
         `;
     }
@@ -153,8 +140,18 @@ function renderSite() {
 
     app.innerHTML = html;
 
-    const currentLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default;
-    document.getElementById('about-text').innerHTML = renderAboutText(currentLang);
-}
+    if (config.comments.enabled && config.comments.platform === 'utterances') {
+        const commentsConfig = config.comments.utterances;
+        const script = document.createElement('script');
+        script.src = 'https://utteranc.es/client.js';
+        script.setAttribute('repo', commentsConfig.repo);
+        script.setAttribute('issue-term', commentsConfig.issueTerm);
+        script.setAttribute('theme', commentsConfig.theme);
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
 
-document.addEventListener('DOMContentLoaded', renderSite);
+        const container = document.getElementById('utterances-container');
+        if (container) {
+            container.appendChild(script);
+        }
+    }
