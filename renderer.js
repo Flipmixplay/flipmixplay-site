@@ -45,15 +45,13 @@ function renderSite() {
         </header>
     `;
 
-     // ОБО МНЕ
-     // Определяем начальный язык корректно
-     const initialLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default || 'en';
-     html += `
-     <section id="about">
-     <h2 data-i18n="about_title">About Me</h2>
-     <p id="about-text">${renderAboutText(initialLang)}</p>
-     </section>
-     `;
+    // ОБО МНЕ
+    html += `
+        <section class="about section">
+            <h2><i class="fas fa-user"></i> <span data-i18n="about_title">About Me</span></h2>
+            <p id="about-text">${renderAboutText('en')}</p>
+        </section>
+    `;
 
     // ССЫЛКИ
     const links = config.links;
