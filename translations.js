@@ -13,7 +13,7 @@ const TRANSLATIONS = {
         about_title: "About Me",
         connect_title: "Connect With Me",
         dota_title: "Dota 2 Statistics",
-        comments_title: "Discussion",
+        comments_title: "Comments",
 
         // Ссылки
         github: "My GitHub",
@@ -56,7 +56,7 @@ const TRANSLATIONS = {
         about_title: "Обо мне",
         connect_title: "Связаться со мной",
         dota_title: "Статистика Dota 2",
-        comments_title: "Обсуждение",
+        comments_title: "Комментарии",
 
         // Ссылки
         github: "Мой GitHub",

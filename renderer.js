@@ -121,7 +121,7 @@ function renderSite() {
             <section class="comments-section section">
                 <div class="comments-header">
                     <i class="fas fa-comments"></i>
-                    <h2 data-i18n="comments_title">Discussion</h2>
+                    <h2 data-i18n="comments_title">Comments</h2>
                     <span class="comments-badge">Powered by ${config.comments.platform}</span>
                 </div>
                 <div id="utterances-container"></div>
