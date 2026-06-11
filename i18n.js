@@ -1,99 +1,36 @@
-// Словарь переводов
-const translations = {
-
-    en: {
-        subtitle: "Welcome to my personal corner of the web!",
-        about_title: "About Me",
-        about_text_1: "Hello my name is Miron",
-        about_text_2: "I am",
-        about_text_3: "years old!",
-        about_text_4: "I love games like Dota, Terraria, Risk of Rain 2 and all sorts of indie projects.",
-        about_text_5: "I also like programming in Python and C#.",
-        about_text_6: "Self-taught guitarist with 5",
-        about_text_7: " years of experience.",
-        connect_title: "Connect With Me",
-        github: "My GitHub",
-        steam: "My Steam",
-        discord: "My Discord",
-        youtube: "My Youtube",
-        dota_title: "Dota 2 Statistics",
-        rank_tier: "Rank Tier",
-        winrate: "Winrate",
-        most_played: "Most Played",
-        view_opendota: "View Full Profile on OpenDota",
-        comments_title: "Discussion",
-        hosted: "Hosted with ❤️ on",
-        loading: "Loading...",
-        unranked: "Unranked"
-    },
-    ru: {
-        subtitle: "Добро пожаловать в мой личный уголок интернета!",
-        about_title: "Обо мне",
-        about_text_1: "Привет, меня зовут Мирон",
-        about_text_2: "Мне",
-        about_text_3: "лет!",
-        about_text_4: "Я люблю такие игры как Dota, Terraria, Risk of Rain 2 и всякие инди-проекты.",
-        about_text_5: "Также мне нравится программировать на Python и C#.",
-        about_text_6: "Самоучка-гитарист с",
-        about_text_7: "-летним стажем.",
-        connect_title: "Связаться со мной",
-        github: "Мой GitHub",
-        steam: "Мой Steam",
-        discord: "Мой Discord",
-        youtube: "Мой Youtube",
-        dota_title: "Статистика Dota 2",
-        rank_tier: "Ранг",
-        winrate: "Винрейт",
-        most_played: "Любимый герой",
-        view_opendota: "Полный профиль на OpenDota",
-        comments_title: "Обсуждение",
-        hosted: "Размещено с ❤️ на",
-        loading: "Загрузка...",
-        unranked: "Без ранга"
-    }
-};
-
-// Словарь переводов рангов Dota 2
-const rankTranslations = {
-    en: {
-        "Herald": "Herald", "Guardian": "Guardian", "Crusader": "Crusader",
-        "Archon": "Archon", "Legend": "Legend", "Ancient": "Ancient",
-        "Divine": "Divine", "Immortal": "Immortal", "Unranked": "Unranked"
-    },
-    ru: {
-        "Herald": "Рекрут", "Guardian": "Страж", "Crusader": "Рыцарь",
-        "Archon": "Герой", "Legend": "Легенда", "Ancient": "Властелин",
-        "Divine": "Божество", "Immortal": "Титан", "Unranked": "Без ранга"
-    }
-};
+// ============================================
+// СИСТЕМА ЛОКАЛИЗАЦИИ
+// ============================================
 
 // Функция перевода ранга
 function getTranslatedRank(rankText) {
     if (!rankText || rankText === 'N/A') return rankText;
-    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+    const currentLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default;
 
-    // Разделяем "Crusader" и "3"
     const parts = rankText.split(' ');
     const medal = parts[0];
     const stars = parts[1] || '';
 
-    const translatedMedal = rankTranslations[currentLang][medal] || medal;
+    const translatedMedal = TRANSLATIONS[currentLang].ranks[medal] || medal;
     return stars ? `${translatedMedal} ${stars}` : translatedMedal;
+}
+
+// Функция получения перевода
+function t(key) {
+    const lang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default;
+    return TRANSLATIONS[lang][key] || TRANSLATIONS.en[key] || key;
 }
 
 // Функция переключения языка
 function setLanguage(lang) {
-    // Проверяем, существует ли язык
-    if (!translations[lang]) {
-        lang = 'en'; // По умолчанию английский
+    if (!TRANSLATIONS[lang]) {
+        lang = SITE_CONFIG.language.default;
     }
 
     // Обновляем все элементы с data-i18n
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-            element.textContent = translations[lang][key];
-        }
+        element.textContent = t(key);
     });
 
     // Обновляем атрибут lang в HTML
@@ -107,47 +44,44 @@ function setLanguage(lang) {
         }
     });
 
-    // Сохраняем выбор в localStorage
+    // Сохраняем выбор
     localStorage.setItem('preferredLanguage', lang);
 
-    // Переводим ранг, если он уже загружен
+    // Переводим ранг
     const rankEl = document.getElementById('dota-rank');
     if (rankEl && rankEl.dataset.originalRank) {
         rankEl.textContent = getTranslatedRank(rankEl.dataset.originalRank);
     }
+
+    // Обновляем заголовок страницы
+    document.title = `${SITE_CONFIG.profile.name}'s Website`;
 }
 
 // Автоматическое определение языка
 function detectLanguage() {
-    // Сначала проверяем localStorage
     const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang && translations[savedLang]) {
+    if (savedLang && TRANSLATIONS[savedLang]) {
         return savedLang;
     }
 
-    // Если нет сохраненного, определяем язык браузера
-    const browserLang = navigator.language || navigator.userLanguage;
-
-    // Проверяем, начинается ли язык с 'ru'
-    if (browserLang.startsWith('ru')) {
-        return 'ru';
+    if (SITE_CONFIG.language.autoDetect) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('ru')) {
+            return 'ru';
+        }
     }
 
-    // По умолчанию английский
-    return 'en';
+    return SITE_CONFIG.language.default;
 }
 
-// Инициализация при загрузке страницы
+// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
-    // Определяем язык
     const lang = detectLanguage();
     setLanguage(lang);
 
-    // Добавляем обработчики на кнопки переключения
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const lang = btn.getAttribute('data-lang');
-            setLanguage(lang);
+            setLanguage(btn.getAttribute('data-lang'));
         });
     });
 });

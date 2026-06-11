@@ -115,10 +115,8 @@ function renderSite() {
         `;
     }
 
-    // КОММЕНТАРИИ
+    // КОММЕНТАРИИ - ИСПРАВЛЕННАЯ ВЕРСИЯ
     if (config.comments.enabled) {
-        const commentsConfig = config.comments[config.comments.platform];
-
         html += `
             <section class="comments-section section">
                 <div class="comments-header">
@@ -140,6 +138,7 @@ function renderSite() {
 
     app.innerHTML = html;
 
+    // ✅ ЗАГРУЗКА КОММЕНТАРИЕВ ПОСЛЕ ВСТАВКИ HTML
     if (config.comments.enabled && config.comments.platform === 'utterances') {
         const commentsConfig = config.comments.utterances;
         const script = document.createElement('script');
@@ -155,3 +154,9 @@ function renderSite() {
             container.appendChild(script);
         }
     }
+
+    const currentLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default;
+    document.getElementById('about-text').innerHTML = renderAboutText(currentLang);
+}
+
+document.addEventListener('DOMContentLoaded', renderSite);
