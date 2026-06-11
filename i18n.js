@@ -21,7 +21,7 @@ function t(key) {
     return TRANSLATIONS[lang][key] || TRANSLATIONS.en[key] || key;
 }
 
-
+//функция смены перевода
 function setLanguage(lang) {
   // Проверяем, существует ли язык
   if (!translations[lang]) {
@@ -36,11 +36,15 @@ function setLanguage(lang) {
     }
   });
 
-  // 2. ✅ ИСПРАВЛЕНИЕ: Обновляем динамический текст "Обо мне"
+  // 2. ✅ БЕЗОПАСНОЕ ОБНОВЛЕНИЕ ТЕКСТА "ОБО МНЕ"
   const aboutTextEl = document.getElementById('about-text');
-  if (aboutTextEl) {
-    // Функция renderAboutText доступна глобально из renderer.js
-    aboutTextEl.innerHTML = renderAboutText(lang); 
+  // Проверяем, существует ли элемент и доступна ли функция renderAboutText
+  if (aboutTextEl && typeof renderAboutText === 'function') {
+    try {
+      aboutTextEl.innerHTML = renderAboutText(lang);
+    } catch (e) {
+      console.error('Ошибка при переводе текста "Обо мне":', e);
+    }
   }
 
   // 3. Обновляем атрибут lang в HTML
