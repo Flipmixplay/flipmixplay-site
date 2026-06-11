@@ -2,7 +2,6 @@
 // РЕНДЕРИНГ КОНТЕНТА ИЗ КОНФИГА
 // ============================================
 
-// Функция расчета лет с указанной даты
 function getYearsSince(dateString) {
     const today = new Date();
     const pastDate = new Date(dateString);
@@ -15,7 +14,6 @@ function getYearsSince(dateString) {
     return years;
 }
 
-// Функция рендеринга текста "Обо мне" с подстановкой возраста
 function renderAboutText(lang) {
     const config = SITE_CONFIG.profile;
     const age = getYearsSince(config.dates.birthday);
@@ -28,14 +26,13 @@ function renderAboutText(lang) {
     }).join('<br>');
 }
 
-// Главная функция рендеринга
 function renderSite() {
     const config = SITE_CONFIG;
     const app = document.getElementById('app');
 
     let html = '';
 
-    // ШАПКА ПРОФИЛЯ
+    // ШАПКА
     html += `
         <header>
             <div class="lang-switcher">
@@ -48,7 +45,7 @@ function renderSite() {
         </header>
     `;
 
-    // РАЗДЕЛ "ОБО МНЕ"
+    // ОБО МНЕ
     html += `
         <section class="about section">
             <h2><i class="fas fa-user"></i> <span data-i18n="about_title">About Me</span></h2>
@@ -56,7 +53,7 @@ function renderSite() {
         </section>
     `;
 
-    // РАЗДЕЛ "ССЫЛКИ"
+    // ССЫЛКИ
     const links = config.links;
     const linkIcons = {
         github: 'fab fa-github',
@@ -89,7 +86,7 @@ function renderSite() {
         </section>
     `;
 
-    // РАЗДЕЛ DOTA 2
+    // DOTA 2
     if (config.dota.enabled) {
         html += `
             <section class="dota-stats section" id="dota-section">
@@ -118,7 +115,7 @@ function renderSite() {
         `;
     }
 
-    // СЕКЦИЯ КОММЕНТАРИЕВ
+    // КОММЕНТАРИИ
     if (config.comments.enabled) {
         const commentsConfig = config.comments[config.comments.platform];
         let commentsScript = '';
@@ -131,25 +128,7 @@ function renderSite() {
                     theme="${commentsConfig.theme}"
                     crossorigin="anonymous"
                     async>
-                </script>
-            `;
-        } else if (config.comments.platform === 'giscus') {
-            commentsScript = `
-                <script src="https://giscus.app/client.js"
-                    data-repo="${commentsConfig.repo}"
-                    data-repo-id="${commentsConfig.repoId}"
-                    data-category="${commentsConfig.category}"
-                    data-category-id="${commentsConfig.categoryId}"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="top"
-                    data-theme="${commentsConfig.theme}"
-                    data-lang="ru"
-                    crossorigin="anonymous"
-                    async>
-                </script>
+                <\/script>
             `;
         }
 
@@ -174,10 +153,8 @@ function renderSite() {
 
     app.innerHTML = html;
 
-    // После рендеринга обновляем текст "Обо мне" на правильный язык
     const currentLang = localStorage.getItem('preferredLanguage') || SITE_CONFIG.language.default;
     document.getElementById('about-text').innerHTML = renderAboutText(currentLang);
 }
 
-// Запускаем рендеринг
 document.addEventListener('DOMContentLoaded', renderSite);
