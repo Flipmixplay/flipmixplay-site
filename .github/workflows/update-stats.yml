@@ -2,7 +2,7 @@ name: Update Dota 2 Stats
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Запуск каждые 6 часов
+    - cron: '0 */24 * * *'  # Запуск каждые 6 часов
   workflow_dispatch:  # Возможность запустить вручную
 
 # ДАЕМ PRAVA NA ZAPIS'
